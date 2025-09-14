@@ -30,7 +30,15 @@ const t: Translations = translations[currentLocale];
 
 // Language switching logic with types
 const oppositeLocale: 'en' | 'th' = currentLocale === 'en' ? 'th' : 'en';
-const currentPath: string = Astro.url.pathname.replace(`/${currentLocale}`, '');
+// Handle path extraction considering Thai is default (no prefix)
+let currentPath: string;
+if (currentLocale === 'en') {
+  // Remove /en prefix from English URLs
+  currentPath = Astro.url.pathname.replace(/^\/en/, '') || '/';
+} else {
+  // For Thai (default locale), use the full path
+  currentPath = Astro.url.pathname;
+}
 const languageSwitchUrl: string = getRelativeLocaleUrl(oppositeLocale, currentPath);
 
 // Language display text

@@ -5,6 +5,7 @@ import cashIcon from '@/assets/WhyUsSection/cash.svg';
 import peopleIcon from '@/assets/WhyUsSection/people.svg';
 import scaleIcon from '@/assets/WhyUsSection/scale.svg';
 import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 
 // Get current language
 const currentLocale = Astro.currentLocale as 'en' | 'th' || 'th';
@@ -20,8 +21,10 @@ const translations = {
 
 const t = translations[currentLocale];
 
-// Benefits configuration
-const benefits = [
+// Benefits configuration with proper typing
+type BenefitKey = 'time' | 'cost' | 'scale' | 'experience';
+
+const benefits: { icon: ImageMetadata; key: BenefitKey }[] = [
   { icon: timeIcon, key: 'time' },
   { icon: cashIcon, key: 'cost' },
   { icon: scaleIcon, key: 'scale' },

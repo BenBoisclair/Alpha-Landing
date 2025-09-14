@@ -23,19 +23,6 @@ const typedStrings = t.hero.typedStrings.map((str: string, index: number) => {
 });
 ---
 
-<script define:vars={{ typedStrings }}>
-import Typed from 'typed.js';
-
-new Typed('#typed-text', {
-  strings: typedStrings,
-  typeSpeed: 50,
-  backSpeed: 30,
-  loop: true,
-  showCursor: false,
-  contentType: 'html'
-});
-</script>
-
 <div class="flex justify-center items-center flex-col gap-6 min-h-[90vh] pb-40">
     <div class="flex flex-col gap-2 text-center font-bold text-[58px]">
       <h1>{t.hero.title}</h1>
@@ -52,3 +39,34 @@ new Typed('#typed-text', {
         <Button variant="primary">{t.hero.cta}</Button>
     </a>
 </div>
+
+<!-- Store the strings in a data attribute -->
+<div id="typed-strings" data-strings={JSON.stringify(typedStrings)} style="display: none;"></div>
+
+<script>
+  // Wait for the DOM to be ready
+  document.addEventListener('DOMContentLoaded', () => {
+    // Import Typed.js
+    import('typed.js').then(({ default: Typed }) => {
+      // Get the strings from the data attribute
+      const stringsElement = document.getElementById('typed-strings');
+      const typedElement = document.getElementById('typed-text');
+      
+      if (stringsElement && typedElement) {
+        const strings = JSON.parse(stringsElement.dataset.strings || '[]');
+        
+        // Initialize Typed.js
+        new Typed('#typed-text', {
+          strings: strings,
+          typeSpeed: 50,
+          backSpeed: 30,
+          loop: true,
+          showCursor: false,
+          contentType: 'html'
+        });
+      }
+    }).catch(error => {
+      console.error('Failed to load Typed.js:', error);
+    });
+  });
+</script>

@@ -24,12 +24,12 @@ const t = translations[currentLocale];
 
 // Service configuration with icons
 const services = [
-  { icon: robotIcon, key: 'chatbot' },
-  { icon: automationIcon, key: 'automation' },
-  { icon: dataIcon, key: 'dataProcessing' },
-  { icon: chatIcon, key: 'communication' },
-  { icon: analyticsIcon, key: 'analytics' },
-  { icon: secureIcon, key: 'security' }
+  { icon: robotIcon, key: 'chatbot' as keyof typeof t.offering.services },
+  { icon: automationIcon, key: 'automation' as keyof typeof t.offering.services },
+  { icon: dataIcon, key: 'dataProcessing' as keyof typeof t.offering.services },
+  { icon: chatIcon, key: 'communication' as keyof typeof t.offering.services },
+  { icon: analyticsIcon, key: 'analytics' as keyof typeof t.offering.services },
+  { icon: secureIcon, key: 'security' as keyof typeof t.offering.services }
 ];
 ---
 
