@@ -1,0 +1,73 @@
+---
+import Section from "@/layouts/Section.astro";
+import LogoSingle from "@/assets/logo-single.svg";
+import { Image } from 'astro:assets';
+import Button from './Button.astro';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+// Get current language
+const currentLocale = Astro.currentLocale as 'en' | 'th' || 'th';
+
+// Import translations
+import enTranslations from '../i18n/en.json';
+import thTranslations from '../i18n/th.json';
+
+const translations = {
+  en: enTranslations,
+  th: thTranslations
+};
+
+const t = translations[currentLocale];
+---
+
+<Section class="gradient-bg-alt relative overflow-hidden">
+    <div class="flex justify-center w-full flex-col gap-4 items-center relative z-10">
+        <h2 class="text-[42px] font-bold text-white">
+            {t.cta.title}
+            {t.cta.titleHighlight && <span>{t.cta.titleHighlight}</span>}
+        </h2>
+        <p class="text-white">{t.cta.description}</p>
+        <a href={getRelativeLocaleUrl(currentLocale, '/contact')} class="mt-6 inline-block">
+            <Button variant="secondary">{t.cta.button}</Button>
+        </a>
+        {t.cta.checkmarks && <p class="text-white mt-6">{t.cta.checkmarks}</p>}
+    </div>
+    
+    <!-- Background Logo Elements -->
+    <div class="absolute -bottom-20 -left-30 w-96 h-96">
+        <Image src={LogoSingle} alt="" class="w-full h-full opacity-60 logo-glow" width="384" height="384" />
+        <div class="absolute inset-0 light-overlay-1"></div>
+    </div>
+    <div class="absolute -top-20 -right-30 w-96 h-96 rotate-180">
+        <Image src={LogoSingle} alt="" class="w-full h-full opacity-60 logo-glow" width="384" height="384" />
+        <div class="absolute inset-0 light-overlay-2"></div>
+    </div>
+</Section>
+
+<style>
+.logo-glow {
+    filter: drop-shadow(0 0 40px rgba(255, 255, 255, 0.4)) 
+            drop-shadow(0 0 80px rgba(196, 181, 253, 0.3))
+            drop-shadow(0 0 120px rgba(139, 69, 19, 0.2));
+}
+
+.light-overlay-1 {
+    background: radial-gradient(ellipse at center, 
+        rgba(255, 255, 255, 0.3) 0%,
+        rgba(196, 181, 253, 0.2) 30%,
+        rgba(139, 92, 246, 0.1) 60%,
+        transparent 100%);
+    mix-blend-mode: overlay;
+    pointer-events: none;
+}
+
+.light-overlay-2 {
+    background: radial-gradient(ellipse at center, 
+        rgba(191, 219, 254, 0.25) 0%,
+        rgba(196, 181, 253, 0.15) 35%,
+        rgba(147, 51, 234, 0.08) 70%,
+        transparent 100%);
+    mix-blend-mode: screen;
+    pointer-events: none;
+}
+</style>

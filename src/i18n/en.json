@@ -1,0 +1,112 @@
+{
+  "nav": {
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Elevate Your Business with AI",
+    "typedStrings": ["Reduce Work", "Save Time", "Increase Profit"],
+    "subtitle": "Focus on What Matters,",
+    "subtitleHighlight": "Automate",
+    "subtitleEnd": "the Rest",
+    "cta": "Get in Touch"
+  },
+  "offering": {
+    "title": "Build",
+    "titleHighlight": "AI Agents",
+    "subtitle": "Tailored for Your Business",
+    "services": {
+      "chatbot": {
+        "title": "AI Chatbots & Customer Support",
+        "description": "Respond to customers instantly, 24/7. Reduce costs, increase satisfaction"
+      },
+      "automation": {
+        "title": "Workflow Automation",
+        "description": "Use automated systems that connect with your existing tools to make work smoother and more efficient"
+      },
+      "dataProcessing": {
+        "title": "Data Processing",
+        "description": "Leverage automated systems connected to your tools for seamless and efficient data handling"
+      },
+      "communication": {
+        "title": "Automated Communication",
+        "description": "Emails, follow-ups, and messages to teams and customers–sent automatically"
+      },
+      "analytics": {
+        "title": "Analytics & Reporting",
+        "description": "View business results in real-time through dashboards and automated reports"
+      },
+      "security": {
+        "title": "Security & Compliance",
+        "description": "Implement automated security and compliance monitoring systems to protect your business and data"
+      }
+    }
+  },
+  "whyUs": {
+    "title": "Why Choose Us",
+    "subtitle": "We deliver measurable results to transform how your business operates",
+    "subtitleLine2": "and create sustainable competitive advantages",
+    "benefits": {
+      "time": {
+        "title": "Save Time",
+        "description": "Let your team focus on strategy and growth"
+      },
+      "cost": {
+        "title": "Reduce Costs",
+        "description": "Cut operational expenses with automation"
+      },
+      "scale": {
+        "title": "Scale Faster",
+        "description": "Handle increased workload without adding staff"
+      },
+      "experience": {
+        "title": "Elevate Experience",
+        "description": "Respond to customers instantly and consistently"
+      }
+    }
+  },
+  "cta": {
+    "title": "Ready to start with",
+    "titleHighlight": "AI?",
+    "description": "Let us help you automate your business and increase efficiency",
+    "button": "Contact Us Today",
+    "checkmarks": "✓ Free initial consultation  ✓ Automation systems designed specifically for your business"
+  },
+  "footer": {
+    "companyName": "Alpha AI Consulting",
+    "description": "Transform your business with cutting-edge AI Automation solutions. We help businesses grow faster, more efficiently, and reduce operational costs simultaneously.",
+    "services": "Our Services",
+    "company": "Company",
+    "servicesItems": {
+      "chatbots": "AI Chatbots",
+      "automation": "Process Automation",
+      "dataProcessing": "Data Processing",
+      "analytics": "Analytics"
+    },
+    "companyItems": {
+      "contact": "Contact Us",
+      "blog": "Blog"
+    },
+    "copyright": "© 2024 Alpha Bear Consulting. All rights reserved."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Get in touch with our team",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "send": "Send Message",
+      "sending": "Sending...",
+      "success": "Message sent successfully! We'll get back to you soon.",
+      "error": "Failed to send message. Please try again.",
+      "required": "This field is required",
+      "invalidEmail": "Please enter a valid email address"
+    },
+    "info": {
+      "title": "Contact Information",
+      "line": "Line ID",
+      "email": "Email"
+    }
+  }
+}

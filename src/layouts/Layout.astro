@@ -1,0 +1,24 @@
+---
+import Navbar from '../components/Navbar.astro';
+
+import '@fontsource/roboto';
+import '@fontsource-variable/noto-sans-thai';
+
+const currentLocale = Astro.currentLocale || 'th';
+
+const fontClass = currentLocale === 'th' ? 'font-thai' : 'font-english';
+---
+<!DOCTYPE html>
+<html lang={currentLocale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alpha Consulting</title>
+    <link rel="stylesheet" href="/src/styles/global.css" />
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="49ddcd0b-960b-4f78-beae-0b4f546be491"></script>
+  </head>
+  <body class={fontClass}>
+    <Navbar />
+    <slot />
+  </body>
+</html>

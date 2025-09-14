@@ -1,0 +1,50 @@
+---
+import Section from '@/layouts/Section.astro';
+import robotIcon from '@/assets/OfferingSection/robot.svg';
+import automationIcon from '@/assets/OfferingSection/automation.svg';
+import chatIcon from '@/assets/OfferingSection/chat.svg';
+import dataIcon from '@/assets/OfferingSection/data.svg';
+import secureIcon from '@/assets/OfferingSection/secure.svg';
+import analyticsIcon from '@/assets/OfferingSection/analytics.svg';
+import { Image } from 'astro:assets';
+
+// Get current language
+const currentLocale = Astro.currentLocale as 'en' | 'th' || 'th';
+
+// Import translations
+import enTranslations from '../i18n/en.json';
+import thTranslations from '../i18n/th.json';
+
+const translations = {
+  en: enTranslations,
+  th: thTranslations
+};
+
+const t = translations[currentLocale];
+
+// Service configuration with icons
+const services = [
+  { icon: robotIcon, key: 'chatbot' },
+  { icon: automationIcon, key: 'automation' },
+  { icon: dataIcon, key: 'dataProcessing' },
+  { icon: chatIcon, key: 'communication' },
+  { icon: analyticsIcon, key: 'analytics' },
+  { icon: secureIcon, key: 'security' }
+];
+---
+
+<Section>
+    <div class="flex justify-center items-center w-full flex-col text-[42px] font-bold">
+        <h2>{t.offering.title} <span class="gradient-text">{t.offering.titleHighlight}</span></h2>
+        <h2>{t.offering.subtitle}</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-6 mt-10 justify-items-center place-items-center max-w-6xl mx-auto">
+        {services.map((service) => (
+            <div class="rounded-2xl border-1 border-[#747474] flex-col p-10 gap-3 flex items-start w-[371px] h-[297px]">
+                <Image src={service.icon} alt={`${service.key} Icon`} class="w-[50px] h-[50px]" width="50" height="50" />
+                <h3 class="font-bold text-[20px]">{t.offering.services[service.key].title}</h3>
+                <p>{t.offering.services[service.key].description}</p>
+            </div>
+        ))}
+    </div>
+</Section>

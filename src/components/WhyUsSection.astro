@@ -1,0 +1,49 @@
+---
+import Section from "@/layouts/Section.astro";
+import timeIcon from '@/assets/WhyUsSection/time.svg';
+import cashIcon from '@/assets/WhyUsSection/cash.svg';
+import peopleIcon from '@/assets/WhyUsSection/people.svg';
+import scaleIcon from '@/assets/WhyUsSection/scale.svg';
+import { Image } from 'astro:assets';
+
+// Get current language
+const currentLocale = Astro.currentLocale as 'en' | 'th' || 'th';
+
+// Import translations
+import enTranslations from '../i18n/en.json';
+import thTranslations from '../i18n/th.json';
+
+const translations = {
+  en: enTranslations,
+  th: thTranslations
+};
+
+const t = translations[currentLocale];
+
+// Benefits configuration
+const benefits = [
+  { icon: timeIcon, key: 'time' },
+  { icon: cashIcon, key: 'cost' },
+  { icon: scaleIcon, key: 'scale' },
+  { icon: peopleIcon, key: 'experience' }
+];
+---
+
+<Section>
+    <div class="flex justify-center items-center w-full flex-col gap-4">
+        <h2 class="text-[42px] font-bold">{t.whyUs.title}</h2>
+        <div class="flex flex-col font-medium text-center">
+            <p>{t.whyUs.subtitle}</p>
+            <p>{t.whyUs.subtitleLine2}</p>
+        </div>
+    </div>
+    <div class="flex gap-6 mt-10">
+        {benefits.map((benefit) => (
+            <div class="gradient-border rounded-2xl flex flex-col justify-center items-center p-5 text-center flex-1 h-48">
+                <Image src={benefit.icon} alt={`${benefit.key} Icon`} class="w-[36px] h-[36px]" width="36" height="36" />
+                <h3 class="font-bold text-[20px] mt-4">{t.whyUs.benefits[benefit.key].title}</h3>
+                <p class="mt-2">{t.whyUs.benefits[benefit.key].description}</p>
+            </div>
+        ))}
+    </div>
+</Section>

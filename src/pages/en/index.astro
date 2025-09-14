@@ -5,15 +5,6 @@ import OfferingSection from "@/components/OfferingSection.astro";
 import WhyUsSection from "@/components/WhyUsSection.astro";
 import CTASection from "@/components/CTASection.astro";
 import Footer from "@/components/Footer.astro";
-
-const acceptLanguage = Astro.request.headers.get('accept-language') || '';
-const prefersEnglish = acceptLanguage.toLowerCase().includes('en');
-
-if (prefersEnglish) {
-  return Astro.redirect('/en/');
-}
-
-
 ---
 
 <Layout>
