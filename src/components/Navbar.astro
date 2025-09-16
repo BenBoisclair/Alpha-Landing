@@ -2,6 +2,7 @@
 import { getRelativeLocaleUrl } from 'astro:i18n';
 import { Image } from 'astro:assets';
 import Logo from '@/assets/logo.svg';
+import { Menu, X, Globe } from '@lucide/astro';
 
 // Define types for your translations
 interface NavTranslations {
@@ -47,30 +48,103 @@ const languageButtonText: string = currentLocale === 'en' ? 'TH' : 'EN';
 ---
 
 <div>
-    <nav class="flex px-[80px] py-[20px] items-center justify-between">
+    <nav class="flex px-6 sm:px-10 lg:px-[80px] py-[20px] items-center justify-between relative">
         <a href={getRelativeLocaleUrl(currentLocale, '/')}>
-            <Image src={Logo} alt="Logo" class="logo" width="80" height="80" loading={'eager'} />
+            <Image src={Logo} alt="Logo" class="logo w-16 h-16 sm:w-20 sm:h-20" width="80" height="80" loading={'eager'} />
         </a>
-        <div class="flex items-center gap-14">
-            <ul class="flex gap-10 items-center">
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex items-center gap-8 lg:gap-14">
+            <ul class="flex gap-6 lg:gap-10 items-center">
                 <li>
-                    <a href={getRelativeLocaleUrl(currentLocale, '/blog')}>
+                    <a href={getRelativeLocaleUrl(currentLocale, '/blog')} class="hover:opacity-70 transition-opacity">
                         {t.nav.blog}
                     </a>
                 </li>
                 <li>
-                    <a href={getRelativeLocaleUrl(currentLocale, '/contact')}>
+                    <a href={getRelativeLocaleUrl(currentLocale, '/contact')} class="hover:opacity-70 transition-opacity">
                         {t.nav.contact}
                     </a>
                 </li>
             </ul>
-            <a 
-                href={languageSwitchUrl} 
-                class="p-3 rounded-2 hover:bg-black/10 rounded-lg"
+            <a
+                href={languageSwitchUrl}
+                class="p-3 hover:bg-black/10 rounded-lg transition-colors flex items-center gap-2"
                 aria-label={`Switch to ${oppositeLocale === 'en' ? 'English' : 'Thai'}`}
             >
-                {languageButtonText}
+                <Globe class="w-4 h-4" />
+                <span>{languageButtonText}</span>
             </a>
         </div>
+
+        <!-- Mobile Menu Button -->
+        <button
+            id="mobile-menu-toggle"
+            class="md:hidden p-2 hover:bg-black/10 rounded-lg transition-colors"
+            aria-label="Toggle mobile menu"
+            aria-expanded="false"
+        >
+            <Menu id="menu-icon" class="w-6 h-6" />
+            <X id="close-icon" class="w-6 h-6 hidden" />
+        </button>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
+        <div class="px-6 py-4 space-y-4">
+            <ul class="space-y-4">
+                <li>
+                    <a
+                        href={getRelativeLocaleUrl(currentLocale, '/blog')}
+                        class="block py-2 hover:opacity-70 transition-opacity"
+                    >
+                        {t.nav.blog}
+                    </a>
+                </li>
+                <li>
+                    <a
+                        href={getRelativeLocaleUrl(currentLocale, '/contact')}
+                        class="block py-2 hover:opacity-70 transition-opacity"
+                    >
+                        {t.nav.contact}
+                    </a>
+                </li>
+            </ul>
+            <div class="pt-4 border-t border-gray-200">
+                <a
+                    href={languageSwitchUrl}
+                    class="inline-flex items-center gap-2 p-3 hover:bg-black/10 rounded-lg transition-colors"
+                    aria-label={`Switch to ${oppositeLocale === 'en' ? 'English' : 'Thai'}`}
+                >
+                    <Globe class="w-4 h-4" />
+                    <span>{languageButtonText}</span>
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script>
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const menu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    const closeIcon = document.getElementById('close-icon');
+
+    if (toggle && menu && menuIcon && closeIcon) {
+        toggle.addEventListener('click', () => {
+            const isOpen = !menu.classList.contains('hidden');
+
+            if (isOpen) {
+                menu.classList.add('hidden');
+                menuIcon.classList.remove('hidden');
+                closeIcon.classList.add('hidden');
+                toggle.setAttribute('aria-expanded', 'false');
+            } else {
+                menu.classList.remove('hidden');
+                menuIcon.classList.add('hidden');
+                closeIcon.classList.remove('hidden');
+                toggle.setAttribute('aria-expanded', 'true');
+            }
+        });
+    }
+</script>

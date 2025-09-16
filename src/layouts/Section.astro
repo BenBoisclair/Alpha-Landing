@@ -8,6 +8,6 @@ export interface Props {
 const { class: className } = Astro.props;
 ---
 
-<div class={cn("px-[120px] pt-[60px] pb-[100px]", className)}>
+<div class={cn("px-6 sm:px-10 md:px-16 lg:px-20 xl:px-[120px] pt-10 sm:pt-12 md:pt-[60px] pb-16 sm:pb-20 md:pb-[100px]", className)}>
     <slot />
 </div>
