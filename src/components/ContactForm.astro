@@ -78,8 +78,6 @@ const { formText } = Astro.props;
 </div>
 
 <script>
-  import { actions } from 'astro:actions';
-  
   const form = document.getElementById('contact-form') as HTMLFormElement;
   const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
   const btnText = document.getElementById('btn-text');
@@ -101,10 +99,26 @@ const { formText } = Astro.props;
     }
   }
 
+  function clearErrors() {
+    const errorSpans = form.querySelectorAll('.error-msg');
+    errorSpans.forEach(span => {
+      span.textContent = '';
+      span.classList.add('hidden');
+    });
+    const inputs = form.querySelectorAll('input, textarea');
+    inputs.forEach(input => {
+      input.classList.remove('border-red-500');
+    });
+  }
 
   // Handle form submission
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
+    
+    // Clear previous errors
+    clearErrors();
+    if (successMsg) successMsg.classList.add('hidden');
+    if (errorMsg) errorMsg.classList.add('hidden');
     
     // Get the FormData
     const formData = new FormData(form);
@@ -136,12 +150,6 @@ const { formText } = Astro.props;
     }
     
     if (hasErrors) return;
-
-    const dataToSend = new FormData();
-    dataToSend.append('name', name);
-    dataToSend.append('email', email);
-    dataToSend.append('message', message);
-    
     
     // Update button
     if (submitBtn && btnText) {
@@ -150,14 +158,23 @@ const { formText } = Astro.props;
     }
     
     try {
+      // Send JSON data to API endpoint
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+        }),
+      });
       
-      // Send FormData to action
-      const result = await actions.sendContact(dataToSend);
-
-
+      const result = await response.json();
       
-      if (result.error) {
-        throw new Error(result.error.message);
+      if (!response.ok) {
+        throw new Error(result.error || 'Failed to send message');
       }
       
       // Success!

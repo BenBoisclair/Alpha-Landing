@@ -1,6 +1,6 @@
-import { a as createAstro, c as createComponent, r as renderTemplate } from '../../chunks/astro/server_CAhXBRiF.mjs';
+import { a as createAstro, c as createComponent, r as renderTemplate } from '../../chunks/astro/server_CYQHRzIz.mjs';
 import 'clsx';
-import { r as renderEntry, g as getCollection } from '../../chunks/_astro_content_CuYlPqrc.mjs';
+import { r as renderEntry, g as getCollection } from '../../chunks/_astro_content_BsUw3rMZ.mjs';
 export { renderers } from '../../renderers.mjs';
 
 const $$Astro = createAstro("https://example.com");

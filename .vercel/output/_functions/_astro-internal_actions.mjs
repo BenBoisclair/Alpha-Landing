@@ -1,8 +1,8 @@
-import { o as objectType, s as stringType } from './chunks/astro/server_CAhXBRiF.mjs';
-import { g as getActionQueryString, a as astroCalledServerError, A as ActionError, d as deserializeActionResult, b as ACTION_QUERY_PARAMS, c as appendForwardSlash } from './chunks/astro-designed-error-pages_BDDRoq12.mjs';
+import { o as objectType, s as stringType } from './chunks/astro/server_CYQHRzIz.mjs';
+import { g as getActionQueryString, a as astroCalledServerError, A as ActionError, d as deserializeActionResult, b as ACTION_QUERY_PARAMS, c as appendForwardSlash } from './chunks/astro-designed-error-pages_Dt1QjSc8.mjs';
 import 'clsx';
 import { Resend } from 'resend';
-import { d as defineAction } from './chunks/server_BG_E99xL.mjs';
+import { d as defineAction } from './chunks/server_B05ua4yj.mjs';
 
 const apiContextRoutesSymbol = Symbol.for("context.routes");
 const ENCODED_DOT = "%2E";
@@ -105,37 +105,64 @@ async function handleAction(param, path, context) {
 toActionProxy();
 
 const resend = new Resend("re_PatsKRA3_5b8Qg2tcA5gDNwPUt9AMCBpn");
+const IS_TEST_MODE = !undefined                                      ;
+const TEST_EMAIL = "ben.b.boisclair@gmail.com";
+const PROD_EMAIL = "hello@alphabearconsulting.com";
 const server = {
   sendContact: defineAction({
+    accept: "form",
     input: objectType({
       name: stringType().min(1, "Name is required"),
-      email: stringType().email("Invalid email format"),
+      email: stringType().email("Invalid email"),
       message: stringType().min(1, "Message is required")
     }),
-    handler: async ({ name, email, message }) => {
-      const { data, error } = await resend.emails.send({
-        from: "Alpha Contact Form <onboarding@resend.dev>",
-        to: ["hello@alphabearconsulting.com"],
-        // Replace with your actual email
-        subject: `New Contact Form Submission from ${name}`,
-        html: `
-          <h2>New Contact Form Submission</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Message:</strong></p>
-          <p>${message.replace(/\n/g, "<br>")}</p>
-          <hr>
-          <p><em>Sent from Alpha website contact form</em></p>
-        `,
-        replyTo: email
-      });
-      if (error) {
+    handler: async (input) => {
+      try {
+        const recipient = IS_TEST_MODE ? TEST_EMAIL : PROD_EMAIL;
+        const emailData = {
+          from: "Alpha Bear Consulting <hello@alphabearconsulting.com>",
+          to: [recipient],
+          subject: `${IS_TEST_MODE ? "[TEST] " : ""}Contact from ${input.name}`,
+          html: `
+            <h2>New Contact Form Submission ${IS_TEST_MODE ? "(TEST MODE)" : ""}</h2>
+            <p><strong>Name:</strong> ${input.name}</p>
+            <p><strong>Email:</strong> ${input.email}</p>
+            <p><strong>Message:</strong></p>
+            <p>${input.message.replace(/\n/g, "<br>")}</p>
+            ${IS_TEST_MODE ? "<hr><p><em>This is a test email. In production, this would go to " + PROD_EMAIL + "</em></p>" : ""}
+          `,
+          replyTo: input.email
+        };
+        const { data, error } = await resend.emails.send(emailData);
+        if (error) {
+          let errorMessage = "Failed to send email.";
+          if (error.message?.includes("can only send testing emails")) {
+            errorMessage = "Email service is in test mode. Message saved but not sent to production.";
+          } else if (error.message?.includes("domain")) {
+            errorMessage = "Email configuration issue. Please contact support.";
+          } else if (error.message) {
+            errorMessage = error.message;
+          }
+          throw new ActionError({
+            code: "BAD_REQUEST",
+            message: errorMessage
+          });
+        }
+        return {
+          success: true,
+          id: data?.id,
+          testMode: IS_TEST_MODE,
+          sentTo: recipient
+        };
+      } catch (error) {
+        if (error instanceof ActionError) {
+          throw error;
+        }
         throw new ActionError({
           code: "INTERNAL_SERVER_ERROR",
-          message: `Failed to send email: ${error.message}`
+          message: "Failed to process your request."
         });
       }
-      return { success: true, id: data?.id };
     }
   })
 };
