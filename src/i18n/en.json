@@ -108,5 +108,10 @@
       "line": "Line ID",
       "email": "Email"
     }
+  },
+  "maintenance": {
+    "title": "Blog Under Maintenance",
+    "subtitle": "We're still constructing the blog!",
+    "message": "It will be online shortly. Thank you for your patience."
   }
 }
