@@ -87,7 +87,7 @@
       "contact": "ติดต่อเรา",
       "blog": "บทความ"
     },
-    "copyright": "© 2024 Alpha Bear Consulting. All rights reserved."
+    "copyright": "© 2025 Alpha Bear Consulting. All rights reserved."
   },
   "contact": {
     "title": "ติดต่อเรา",
@@ -113,5 +113,20 @@
     "title": "บล็อกอยู่ระหว่างการปรับปรุง",
     "subtitle": "เรากำลังสร้างบล็อก!",
     "message": "จะออนไลน์เร็วๆ นี้ ขอบคุณสำหรับความอดทน"
+  },
+  "blog": {
+    "title": "ข้อมูลเชิงลึก และนวัตกรรม AI",
+    "subtitle": "สำรวจเทรนด์ล่าสุดในด้าน AI automation การเปลี่ยนแปลงธุรกิจ และเทคโนโลยี",
+    "latestPosts": "บทความล่าสุด",
+    "subscribe": "รับข้อมูลใหม่",
+    "featured": "บทความแนะนำ",
+    "featuredSubtitle": "ข้อมูลเชิงลึกเกี่ยวกับการนำ AI ไปใช้และกลยุทธ์การเปลี่ยนแปลงดิจิทัล",
+    "readMore": "อ่านต่อ",
+    "readArticle": "อ่านบทความ",
+    "allPosts": "บทความทั้งหมด",
+    "allPostsSubtitle": "ข้อมูลเชิงลึก บทเรียน และอัปเดตจากโลกของ AI และระบบอัตโนมัติ",
+    "newsletterTitle": "ติดตามข่าวสารล่าสุด",
+    "newsletterSubtitle": "รับข้อมูลเชิงลึกด้าน AI และกลยุทธ์ระบบอัตโนมัติส่งตรงถึงอีเมลคุณ",
+    "subscribeButton": "สมัครรับข่าวสาร"
   }
 }

@@ -1,6 +1,8 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
 
+// Pre-render blog pages at build time while keeping rest of site SSR
+export const prerender = true;
 
 export async function getStaticPaths() {
 	const posts = await getCollection('blog');

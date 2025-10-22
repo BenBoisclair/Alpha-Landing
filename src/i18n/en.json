@@ -87,7 +87,7 @@
       "contact": "Contact Us",
       "blog": "Blog"
     },
-    "copyright": "© 2024 Alpha Bear Consulting. All rights reserved."
+    "copyright": "© 2025 Alpha Bear Consulting. All rights reserved."
   },
   "contact": {
     "title": "Contact Us",
@@ -113,5 +113,20 @@
     "title": "Blog Under Maintenance",
     "subtitle": "We're still constructing the blog!",
     "message": "It will be online shortly. Thank you for your patience."
+  },
+  "blog": {
+    "title": "AI Insights & Innovation",
+    "subtitle": "Explore the latest in AI automation, business transformation, and technology trends",
+    "latestPosts": "Latest Posts",
+    "subscribe": "Get Updates",
+    "featured": "Featured Articles",
+    "featuredSubtitle": "Deep dives into AI implementation and digital transformation strategies",
+    "readMore": "Read More",
+    "readArticle": "Read Article",
+    "allPosts": "All Articles",
+    "allPostsSubtitle": "Insights, tutorials, and updates from the world of AI and automation",
+    "newsletterTitle": "Stay Ahead of the Curve",
+    "newsletterSubtitle": "Get the latest AI insights and automation strategies delivered to your inbox",
+    "subscribeButton": "Subscribe to Newsletter"
   }
 }
